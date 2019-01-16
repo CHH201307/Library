@@ -5,8 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-</style>
+<%@ include file="/common/common-tag.jsp" %>
+<%@ include file="/common/common-ace.jsp" %>
+
 </head>
 
 <body>
@@ -45,53 +46,41 @@
 					</div>
 			     </form>
 			     <hr class="no-margin">
-			     <table  class="table table-bordered " style="width: 85%">
-					<thead>
-						<tr>
-							<th class="center" style="width: 70px">
-								<label>
-									<input type="checkbox" class="ace">
-									<span class="lbl"></span>
-								</label>
-							</th>
-							<th class="">Status</th>
-							<th class="">Status</th>
-		
-							<th style="width: 190px" class="center">操作</th>
-						</tr>
-					</thead>
-		
-					<tbody>
-						<tr>
-							<td class="center">
-								<label>
-									<input type="checkbox" class="ace">
-									<span class="lbl"></span>
-								</label>
-							</td>
-		
-							<td>$45</td>
-							<td>$45</td>
-							<td>
-		
-									<button class="btn btn-white btn-purple btn-sm">
-										<i class="icon-edit"></i>
-									</button>
-		
-									<button class="btn btn-xs btn-danger btn-white">
-										<i class="icon-trash "></i>
-									</button>
-		
-							</td>
-						</tr>
-					</tbody>
-				</table>
+			     <table class="layui-table layui-form">
+					  <colgroup>
+					    <col width="30">
+					    <col width="200">
+					    <col>
+					  </colgroup>
+					  <thead>
+					    <tr>
+					      <th style="text-align: center;"><input type="checkbox" name="" lay-skin="primary" checked></th>
+					      <th>昵称</th>
+					      <th>加入时间</th>
+					      <th>签名</th>
+					    </tr> 
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <td><input type="checkbox" name="" lay-skin="primary" checked></td>
+					      <td>贤心</td>
+					      <td>2016-11-29</td>
+					      <td>人生就像是一场修行</td>
+					    </tr>
+					    <tr>
+					      <td><input type="checkbox" name="" lay-skin="primary" checked></td>
+					      <td>许闲心</td>
+					      <td>2016-11-28</td>
+					      <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
+					    </tr>
+					  </tbody>
+				  </table>
 			     
 			</div>
 		</div>
 	</div>
 </div>
-<%@ include file="/common/common-tag.jsp" %>
-<%@ include file="/common/common-ace.jsp" %>
+
+<%@ include file="/common/common-layui.jsp" %>
 </body>
 </html>

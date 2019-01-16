@@ -1,0 +1,11 @@
+.layui-form-checkbox[lay-skin=primary] {
+    height: auto!important;
+    line-height: normal!important;
+    min-width: 18px;
+    min-height: 15px;
+    border: none!important;
+    margin-right: 0;
+    padding-left: 19px;
+    padding-right: 0;
+    background: 0 0;
+}
