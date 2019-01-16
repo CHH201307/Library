@@ -20,7 +20,7 @@
 		values (
 			#{user_id,jdbcType=VARCHAR},#{username,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},
 			#{email,jdbcType=VARCHAR},#{pic,jdbcType=VARCHAR},#{create_date,jdbcType=VARCHAR},#{flag,jdbcType=VARCHAR},
-			#{is_lock,jdbcType=VARCHAR},#{account_mony,jdbcType=NUMBER}
+			#{is_lock,jdbcType=VARCHAR},#{account_mony,jdbcType=DECIMAL}
 			)
 	</insert>
 	
