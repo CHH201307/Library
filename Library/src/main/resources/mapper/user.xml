@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="com.ch.bean.userbean.User">
+	<!--用户列表查询  -->
+	<select id="listUser" resultType="com.ch.bean.userbean.User" parameterType="com.ch.bean.userbean.User">
+		SELECT * FROM user where 1=1
+		<if test="username!=null and username !=''">
+			 and username like "%"#{username,jdbcType=VARCHAR}"%"
+		</if>
+		<if test="name!=null and name !=''">
+			 and name like "%"#{name,jdbcType=VARCHAR}"%"
+		</if>
+	</select>
+	
+	<!--保存用户数据  -->
+	<insert id="saveUser" parameterType="com.ch.bean.userbean.User">
+		insert into t_user (user_id,username,name,password,email,pic,create_date,flag,is_lock,account_mony)
+		
+		values (
+			#{user_id,jdbcType=VARCHAR},#{username,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},
+			#{email,jdbcType=VARCHAR},#{pic,jdbcType=VARCHAR},#{create_date,jdbcType=VARCHAR},#{flag,jdbcType=VARCHAR},
+			#{is_lock,jdbcType=VARCHAR},#{account_mony,jdbcType=NUMBER}
+			)
+	</insert>
+	
+	
+</mapper>
