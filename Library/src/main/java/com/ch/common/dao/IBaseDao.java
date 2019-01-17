@@ -12,7 +12,7 @@ public interface IBaseDao {
 	
 	public <T extends BaseVo> Integer Update(String statementId,T vo);
 	
-	public <T extends BaseVo> Integer delete(String statementId,T vo);
+	public <T extends BaseVo> Integer delete(String statementId,String id);
 	
 	public <T extends BaseVo> Integer batchDelete(String statementId,List<String> ids);
 	

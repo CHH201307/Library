@@ -30,14 +30,17 @@ public class BaseDao implements IBaseDao {
 		// TODO Auto-generated method stub
 		return dao.update(statementId, vo);
 	}
-
-	public <T extends BaseVo> Integer delete(String statementId, T vo) {
+	
+	/**
+	 * 单条删除
+	 */
+	public <T extends BaseVo> Integer delete(String statementId,String id) {
 		// TODO Auto-generated method stub
-		return dao.update(statementId, vo);
+		return dao.delete(statementId, id);
 	}
 	
 	/**
-	 * 该方法暂未修改
+	 * 批量删除数据
 	 */
 	public <T extends BaseVo> Integer batchDelete(String statementId, List<String> ids) {
 		// TODO Auto-generated method stub
@@ -45,21 +48,9 @@ public class BaseDao implements IBaseDao {
 		if (ids==null||ids.size()==0) {
 			return 0;
 		}
-		int count=0;
-		int batch=100;
-		for (String id : ids) {
-			if (ids.size()>=batch) {
-				sqlSession.delete(statementId, id);
-				if (count%batch==0) {
-					sqlSession.commit();
-				}
-			}else {
-				sqlSession.delete(statementId, id);
-			}
-			count++;
-		}
+		int delete = sqlSession.delete(statementId, ids);
 		sqlSession.commit();
-		return count;
+		return delete;
 	}
 
 	public <T extends BaseVo> List<T> batchSave(String statementId, List<T> voList) {
