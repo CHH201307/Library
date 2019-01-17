@@ -10,7 +10,7 @@
 
 </head>
 
-<body >
+<body>
 <div class="main-container">
 	<div class="main-content" style="margin: 0">
 		<div class="main-content-inner">
@@ -26,37 +26,18 @@
 		</div>
 		<div class="page-content" >
 			<div class="row" style="margin-top: 10px">
-				<!-- <form class="form-horizontal" role="form" style="margin-bottom: 18px">
-					<div class="form-group">
-						<label class="col-sm-1 control-label no-padding-right" for="form-field-1" style="padding-top: 5px">姓名</label>
-
-						<div class="col-sm-3">
-							<input type="text" id="form-field-1" class="col-xs-9 col-sm-10" style="padding: 8px 5px"/>
-						</div>
-						<label class="col-sm-1 control-label no-padding-right" for="form-field-1" style="padding-top: 5px">账号</label>
-
-						<div class="col-sm-3">
-							<input type="text" id="form-field-1" class="col-xs-9 col-sm-10" style="padding: 8px 5px" />
-						</div>
-						<div class="col-sm-2">
-							<button type="button" class="btn btn-sm btn-success pull-right" style="outline: none;" > 
-								查 询
-							</button>
-						</div>
-					</div>
-			     </form> -->
-			     <form class="layui-form" action="home2.do" id="serachForm">
+			     <form class="layui-form"  id="serachForm" target="">
 					  <div class="layui-form-item">
 					    <label class="layui-form-label">姓名</label>
 					    <div class="layui-input-inline ">
-					      <input type="text" name="name"  autocomplete="off" class="layui-input layui-col-md4" >
+					      <input type="text" name="name"  autocomplete="off" class="layui-input layui-col-md4" id="first">
 					    </div>
 					    
 					    <label class="layui-form-label">用户名</label>
 					    <div class="layui-input-inline layui-col-md4">
-					      <input type="text" name="username"  autocomplete="off" class="layui-input ">
+					      <input type="text" name="username"  autocomplete="off" class="layui-input " id="second">
 					    </div>
-					    <button class="layui-btn " lay-submit="" lay-filter="formDemoPane" >搜索</button>
+					    <button class="layui-btn "  lay-filter="formDemoPane" id="do_search">搜索</button>
 					    
 					  </div>
 			     </form>
@@ -70,49 +51,13 @@
 			     	</div>
 			     	
 			     </div>
-		     	 <div class="layui-row">
-		     		<table class="layui-table layui-form " style="width: 83.5%">
-					  <colgroup>
-					    <col width="30">
-					    <col width="200">
-					    <col>
-					  </colgroup>
-					  <thead>
-					    <tr>
-					      <th style="text-align: center;"><input type="checkbox" name="" lay-skin="primary"  lay-filter="test"></th>
-					      <th>昵称</th>
-					      <th>加入时间</th>
-					      <th>签名</th>
-					    </tr> 
-					  </thead>
-					  <tbody>
-					    <tr>
-					      <td><input type="checkbox" name="check" lay-skin="primary" value="1"></td>
-					      <td>贤心</td>
-					      <td>2016-11-29</td>
-					      <td>人生就像是一场修行</td>
-					    </tr>
-					    <tr>
-					      <td><input type="checkbox" name="check" lay-skin="primary" value="2"></td>
-					      <td>许闲心</td>
-					      <td>2016-11-28</td>
-					      <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
-					    </tr>
-					    <tr>
-					      <td><input type="checkbox" name="check" lay-skin="primary" value="2"></td>
-					      <td>许闲心</td>
-					      <td>2016-11-28</td>
-					      <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
-					    </tr>
-					    
-					    <tr>
-					      <td><input type="checkbox" name="check" lay-skin="primary" value="2"></td>
-					      <td>许闲心</td>
-					      <td>2016-11-28</td>
-					      <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
-					    </tr>
-					  </tbody>
-				  	</table>
+		     	 <div class="layui-row layui-col-md10 layui-form" >
+		     	 	<table class="layui-hide" id="listTable" lay-filter="tableOne"></table>
+		     	 	<script type="text/html" id="barDemo">
+  						<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+  						<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  						<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+					</script>
 			     
 		     	 </div>
 			     
@@ -124,39 +69,51 @@
 <%@ include file="/common/common-tag.jsp" %>
 <%@ include file="/common/common-layui.jsp" %>
 <script type="text/javascript">
-    var arr=[];
-	var form = layui.form,layer = layui.layer;
-	form.on('checkbox(test)', function (data) {
-        $("input[type='checkbox']").each(function () {
-            this.checked = data.elem.checked;
-        });
-        form.render('checkbox');
-    });   
-	$("#deleteBatch").click(function(){
-		arr.length=0;
-		$("input[name='check']:checked").each(function () {
-            arr.push($(this).val());
-        });
-		if(arr.length==0){
-			parent.layer.msg("至少选择一条数据",{offset: "350px"})
-			return;
-		}else{
-			parent.layer.load(0,{offset: "350px"});
-			//此处演示关闭
-			setTimeout(function(){
-			  parent.layer.closeAll('loading');
-			}, 1000);
-		}
-		
-		
-		
-	})
 	
-	form.on('submit()', function(data){
-	   console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
-	   console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
-	   console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
-	});
+	layui.use(['table','form','layer'], function(){
+		var form = layui.form,layer = layui.layer,table = layui.table;
+		  
+		var aa= table.render({
+		    elem: '#listTable',
+		    method:'post',
+		    url:'/user/list.do',
+		    cols: [[
+		      {type:'checkbox'}
+		      ,{field:'user_id', width:80, title: 'ID', sort: true}
+		      ,{field:'username', width:80, title: '用户名'}
+		      ,{field:'name', width:80, title: '姓名'}
+		      ,{field:'opt', width:280, title: '操作',toolbar: '#barDemo',align:'center'}
+		    ]],
+		    page: true,
+		    id: 'listTable',
+		    where:{
+		    	'name': $('#first').val(),
+                'username': $('#secnod').val()
+		    }
+		});
+		$('#do_search').on('click', function () {
+            // 搜索条件
+            table.reload('listTable', {
+                method: 'post',
+                where: {
+                    key:{
+                    	'name': $('#first').val(),
+                        'username': $('#second').val()
+                    }
+                }
+                , page: {
+                    curr: 1
+                }
+            });
+        });
+			
+		  
+     });
+	
+	window.onload=function (){
+		parent.changeFrame();
+
+	}
 </script>
 </body>
 </html>

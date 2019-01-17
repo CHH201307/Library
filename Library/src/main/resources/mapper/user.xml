@@ -4,7 +4,7 @@
 <mapper namespace="com.ch.bean.userbean.User">
 	<!--用户列表查询  -->
 	<select id="listUser" resultType="com.ch.bean.userbean.User" parameterType="com.ch.bean.userbean.User">
-		SELECT * FROM user where 1=1
+		SELECT * FROM t_user where 1=1
 		<if test="username!=null and username !=''">
 			 and username like "%"#{username,jdbcType=VARCHAR}"%"
 		</if>
@@ -23,6 +23,19 @@
 			#{is_lock,jdbcType=VARCHAR},#{account_mony,jdbcType=DECIMAL}
 			)
 	</insert>
+	
+	<!--批量删除  -->
+	<delete id="deleteBath">
+		delete from t_user where user_id in
+		<foreach collection="list" close=")" open="(" separator="," item="user_id">
+			#{user_id,jdbcType=VARCHAR}
+		</foreach>
+	</delete>
+	
+	<!--单条删除  -->
+	<delete id="deleteOne" parameterType="string">
+		delete from t_user where user_id=#{user_id,jdbcType=VARCHAR}
+	</delete>
 	
 	
 </mapper>

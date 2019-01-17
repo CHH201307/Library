@@ -1,4 +1,4 @@
-.layui-form-checkbox[lay-skin=primary] {
+/* .layui-form-checkbox[lay-skin=primary] {
     height: auto!important;
     line-height: normal!important;
     min-width: 18px;
@@ -8,4 +8,9 @@
     padding-left: 19px;
     padding-right: 0;
     background: 0 0;
+} */
+
+.layui-table-cell .layui-form-checkbox[lay-skin=primary] {
+    top: 5px;
+    padding: 0;
 }
