@@ -6,20 +6,27 @@ package com.ch.common.result;
  * @param <T>
  */
 public class ReturnResult<T> {
-	private String message;
-	private String code;
+	private String msg;
+	private Integer code;
 	private T data;
-	public String getMessage() {
-		return message;
+	private Long count;
+	public String getMsg() {
+		return msg;
 	}
-	public void setMessage(String message) {
-		this.message = message;
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
-	public String getCode() {
+	public Integer getCode() {
 		return code;
 	}
-	public void setCode(String code) {
+	public void setCode(Integer code) {
 		this.code = code;
+	}
+	public Long getCount() {
+		return count;
+	}
+	public void setCount(Long count) {
+		this.count = count;
 	}
 	public T getData() {
 		return data;

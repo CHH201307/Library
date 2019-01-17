@@ -23,5 +23,13 @@ public class UserServiceImpl implements UserService {
 		PageInfo<User> pageInfo = new PageInfo<>(list);
 		return pageInfo;
 	}
+	/* (non-Javadoc)
+	 * @see com.ch.service.UserService#deleteOne(java.lang.String)
+	 */
+	@Override
+	public void deleteOne(String id) {
+		// TODO Auto-generated method stub
+		dao.delete(sqlPackage+".deleteOne", id);
+	}
 
 }

@@ -27,7 +27,8 @@ public class UserController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public String list(HttpServletRequest request){
+	public String list(HttpServletRequest request,User user){
+		System.err.println(user.getUsername()+" "+user.getName());
 		String page = request.getParameter("page");
 		String limit = request.getParameter("limit");
 		if (page==null||StringUtil.isEmpty(page)) {
@@ -40,7 +41,6 @@ public class UserController {
 		ReturnResult<Object> result = new ReturnResult<>();
 		
 		try {
-			User user=new User();
 			PageInfo<User> pageInfo = userService.list(user, Integer.parseInt(page), Integer.parseInt(limit));
 			List<User> list = pageInfo.getList();
 			long total = pageInfo.getTotal();
@@ -56,6 +56,22 @@ public class UserController {
 		}
 		
 		
+		
+		return JSON.toJSONString(result);
+	}
+	
+	@RequestMapping("/deleteOne")
+	@ResponseBody
+	public String delete(String user_id){
+		ReturnResult<Object> result = new ReturnResult<>();
+		try {
+			userService.deleteOne(user_id);
+			result.setCode(0);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			result.setCode(1);
+		}
 		
 		return JSON.toJSONString(result);
 	}

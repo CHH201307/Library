@@ -55,7 +55,7 @@
   <div class="layui-body">
     <!-- 内容主体区域 -->
     <div >
-    	<iframe src=""  id="myiframe" scrolling="no"  style="border: 0px;" width = "100%"  ></iframe>
+    	<iframe src="/home2.do"  id="myiframe" scrolling="no"  style="border: 0px;" width = "100%"  onload = "changeFrame()"></iframe>
     </div>
   </div>
   
@@ -70,7 +70,6 @@
 <script type="text/javascript">
 	;!function(){
 	  	var form = layui.form,layer = layui.layer;
-	  	
 	}();
 	
 	function ifreamChange(link){
@@ -81,7 +80,10 @@
 			f.setAttribute("src", "/index3.do");
 		}
 	}
-		  
+	window.onload=function (){
+		 ifreamChange('1')
+		changeFrame();
+	}
 </script>
 </body>
 </html>
