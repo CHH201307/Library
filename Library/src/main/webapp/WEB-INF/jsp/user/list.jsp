@@ -46,7 +46,9 @@
 			     	<div class="layui-col-md4"></div>
 			     	<div class="layui-col-md4"></div>
 			     	<div class="layui-col-md2 layui-col-md-offset8" style="text-align: right;">
-			     		<button class="layui-btn layui-btn-sm layui-btn-normal " style="margin-top: 10px;">添加</button>
+			     		<button class="layui-btn layui-btn-sm layui-btn-normal " style="margin-top: 10px;" id="addBtn">
+			     			<i class="layui-icon-add-1 layui-icon"></i>添加
+			     		</button>
 			     		<button class="layui-btn layui-btn-sm layui-btn-danger " style="margin-top: 10px;" id="deleteBatch">批量删除</button>
 			     	</div>
 			     	
@@ -54,9 +56,15 @@
 		     	 <div class="layui-row layui-col-md10 layui-form" >
 		     	 	<table class="layui-hide" id="listTable" lay-filter="tableOne"></table>
 		     	 	<script type="text/html" id="barDemo">
-  						<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-  						<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-  						<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"  style="text-decoration:none;"><i class="layui-icon">&#xe640;</i></a>
+  						<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail" style="text-decoration:none;">
+							<i class="layui-icon-user layui-icon"></i>
+						</a>
+  						<a class="layui-btn layui-btn-xs" lay-event="edit" title="查看" style="text-decoration:none;">
+							<i class="layui-icon-search layui-icon"></i>
+						</a>
+  						<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"  style="text-decoration:none;">
+							<i class="layui-icon">&#xe640;</i>
+						</a>
 					</script>
 			     
 		     	 </div>
@@ -141,6 +149,20 @@
 				    })
 				});
 			}
+		})
+		$('#addBtn').on('click', function () {
+			parent.layer.open({
+				  type: 2, 
+				  skin:'layui-layer-molv',
+				  area: ['500px', '200px'],
+				  content: ['http://sentsin.com', 'no'],
+				  btn: ['保存', '取消'],
+				  yes: function(index, layero){
+					  console.log(layero)
+				  },
+				  closeBtn:1,
+				  anim: 5
+			});
 		})
 		  
      });
