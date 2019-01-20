@@ -37,5 +37,8 @@
 		delete from t_user where user_id=#{user_id,jdbcType=VARCHAR}
 	</delete>
 	
-	
+	<!--根据主键获取记录  -->
+	<select id="get" parameterType="string" resultType="com.ch.bean.userbean.User">
+		select * from t_user where user_id=#{user_id,jdbcType=VARCHAR}
+	</select>
 </mapper>

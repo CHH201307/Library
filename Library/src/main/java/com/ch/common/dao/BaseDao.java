@@ -100,5 +100,14 @@ public class BaseDao implements IBaseDao {
 		return count;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ch.common.dao.IBaseDao#get(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public <T extends BaseVo> T get(String id, String statementId) {
+		// TODO Auto-generated method stub
+		return dao.selectOne(statementId, id);
+	}
+
 
 }

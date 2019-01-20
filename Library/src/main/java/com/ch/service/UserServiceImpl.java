@@ -31,5 +31,21 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		dao.delete(sqlPackage+".deleteOne", id);
 	}
+	/* (non-Javadoc)
+	 * @see com.ch.service.UserService#get(java.lang.String)
+	 */
+	@Override
+	public User get(String user_id) {
+		// TODO Auto-generated method stub
+		return dao.get(user_id, sqlPackage+".get");
+	}
+	/* (non-Javadoc)
+	 * @see com.ch.service.UserService#save(com.ch.bean.userbean.User)
+	 */
+	@Override
+	public void save(User user) {
+		// TODO Auto-generated method stub
+		dao.insert(user, sqlPackage+".saveUser");
+	}
 
 }

@@ -84,6 +84,10 @@
 		 ifreamChange('1')
 		changeFrame();
 	}
+	
+	function a(){
+		console.log("a")
+	}
 </script>
 </body>
 </html>

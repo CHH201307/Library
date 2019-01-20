@@ -2,6 +2,7 @@ package com.ch.web.userController;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.ch.bean.userbean.User;
@@ -75,4 +77,55 @@ public class UserController {
 		
 		return JSON.toJSONString(result);
 	}
+	
+	@RequestMapping("/edit")
+	public ModelAndView edit(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView("user/edit");
+		String id = request.getParameter("id");
+		if (StringUtil.isNotEmpty(id)) {
+			User user = userService.get(id);
+			mv.addObject("user", user);
+		}
+		return mv;
+	}
+	
+	@RequestMapping("/save")
+	@ResponseBody
+	public String save(HttpServletRequest request,@RequestBody String body){
+		String username = request.getParameter("username");
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		
+		User user = new User();
+		user.setUsername(username);
+		user.setName(name);
+		user.setEmail(email);
+		ReturnResult<Object> result = new ReturnResult<>();
+		try {
+			if (StringUtil.isNotEmpty(user.getUser_id())) {
+				
+			}else {
+				user.setUser_id(UUID.randomUUID().toString());
+				userService.save(user);
+			}
+			result.setCode(1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			result.setCode(1);
+		}
+		
+		return JSON.toJSONString(result);
+	}
+	
+	
 }
+
+
+
+
+
+
+
+
+

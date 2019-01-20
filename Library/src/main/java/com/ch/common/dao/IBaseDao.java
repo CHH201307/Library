@@ -20,5 +20,7 @@ public interface IBaseDao {
 	
 	public <T extends BaseVo> Integer batchUpdate(String statementId,List<T> voList);
 	
+	public <T extends BaseVo> T get(String id,String statementId);
+	
 
 }

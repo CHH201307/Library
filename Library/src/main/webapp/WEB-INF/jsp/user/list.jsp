@@ -104,6 +104,11 @@
 		
 		$('#do_search').on('click', function () {
             // 搜索条件
+			reloadTable();
+        });
+		
+		
+		function reloadTable(){
 			tableIns.reload({
 			    where:{
 			    	name: $('#first').val(),
@@ -118,8 +123,7 @@
 				  "name":$('#first').val()
 				  
 			})
-        });
-		
+		}
 		
 		table.on('tool(tableOne)',function(obj){
 			var Event=obj.event;
@@ -154,14 +158,10 @@
 			parent.layer.open({
 				  type: 2, 
 				  skin:'layui-layer-molv',
-				  area: ['500px', '200px'],
-				  content: ['http://sentsin.com', 'no'],
-				  btn: ['保存', '取消'],
-				  yes: function(index, layero){
-					  console.log(layero)
-				  },
+				  area: ['450px', '400px'],
+				  content: ['user/edit.do', 'no'],
 				  closeBtn:1,
-				  anim: 5
+				  anim: 0
 			});
 		})
 		  
