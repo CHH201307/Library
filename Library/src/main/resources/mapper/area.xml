@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="com.ch.bean.areabean.Area">
+	<!--列表查询  -->
+	<select id="list" resultMap="retMap" parameterType="INTEGER">
+		SELECT * FROM `t_area` WHERE area_parent_id =#{area_id,jdbcType=INTEGER} ORDER BY area_id ASC
+	</select>
+	
+	<resultMap type="com.ch.bean.areabean.Area" id="retMap">
+		<result column="id" property="area_id"/>
+		<result column="name" property="area_name"/>
+		<result column="pid" property="area_parent_id"/>
+	</resultMap>
+	
+</mapper>
