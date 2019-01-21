@@ -14,7 +14,59 @@
 <script type="text/javascript">
 	layui.use(['form','layer'], function(){
 		var zTreeObjApp;
+		var nodes=new Array();
 		var form = layui.form,layer = layui.layer;
+		//用于加载数据
+		function getData(area_id,nodeObj){
+			$.ajax({
+				async : false,  
+		        type: 'POST',  
+		        dataType : "json",  
+				method:"get",
+				url:"/area/list.do?area_id="+area_id,
+				success:function(res){
+					debugger
+					if(res.length>0){
+						if(nodeObj!=undefined&&nodeObj.isParent){
+							if(nodeObj.open){
+								zTreeObjApp.expandNode(nodeObj);
+								return;
+							}else{
+								zTreeObjApp.removeChildNodes(nodeObj);
+								var _nodes=new Array();
+								for(var i=0;i<res.length;i++){
+									var node=new Object();
+									var pid=res[i].area_id;
+									node.id=res[i].area_id;
+									node.name=res[i].area_name;
+									if(res[i].is_parent==1){
+										node.isParent=true;
+									}else{
+										node.isParent=false;
+									}
+									_nodes.push(node);
+								}
+								zTreeObjApp.addNodes(nodeObj,_nodes);
+							}
+						}else{
+							nodes.length=0;
+							for(var i=0;i<res.length;i++){
+								var node=new Object();
+								var pid=res[i].area_id;
+								node.id=res[i].area_id;
+								node.name=res[i].area_name;
+								node.isParent=true;
+								nodes.push(node);
+							}
+						}
+					}
+				},
+				error:function(){
+					alert("aaa")
+				}
+			})
+		}
+		
 		var setting = {
             check: {
                 enable: true,
@@ -23,11 +75,16 @@
                 radioType: "all"
             },
             callback: {
-        		onClick: zTreeOnClick
+        		onClick: function(event, treeId, treeNode, clickFlag){
+        			getData(treeNode.id,treeNode);
+        		},
+        		onExpand:function(event, treeId, treeNode, clickFlag){
+        			getData(treeNode.id,treeNode);
+        		}
         	}
         };
 		
-		var nodes=new Array();
+		
 		
 		$("#showTree").on("click",function(){
 			$("#treeApp").show();
@@ -51,38 +108,7 @@
 				
 			})
 			
-			//用于加载数据
-			function getData(area_id){
-				$.ajax({
-					async : false,  
-			        type: 'POST',  
-			        dataType : "json",  
-					method:"get",
-					url:"/area/list.do?area_id="+area_id,
-					success:function(res){
-						if(res.length>0){
-							nodes.length=0;
-							if(res[0].area_parent_id==0){
-								for(var i=0;i<res.length;i++){
-									var node=new Object();
-									var pid=res[i].area_id;
-									node.id=res[i].area_id;
-									node.name=res[i].area_name;
-									node.isParent=true;
-									node.click="getData("+pid+")";
-									nodes.push(node);
-								}
-							}else{
-								//zTreeObjApp.get
-								alert("a")
-							}
-						}
-					},
-					error:function(){
-						alert("aaa")
-					}
-				})
-			}
+			
 		})
 		
 		

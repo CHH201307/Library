@@ -20,6 +20,14 @@ public class Area extends BaseVo {
 	private Integer area_parent_id;
 	private Date init_date;
 	private String init_addr;
+	private String is_parent;
+	
+	public String getIs_parent() {
+		return is_parent;
+	}
+	public void setIs_parent(String is_parent) {
+		this.is_parent = is_parent;
+	}
 	public Integer getArea_id() {
 		return area_id;
 	}
