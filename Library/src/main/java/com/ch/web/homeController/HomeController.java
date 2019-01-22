@@ -20,4 +20,11 @@ public class HomeController {
 		
 		return mv;
 	}
+	
+	@RequestMapping("/home3")
+	public ModelAndView home3(){
+		ModelAndView mv = new ModelAndView("tree/index");
+		
+		return mv;
+	}
 }
